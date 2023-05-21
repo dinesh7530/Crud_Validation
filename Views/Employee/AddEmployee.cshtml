@@ -1,0 +1,82 @@
+﻿@model Crud_Validation.Models.Employee
+
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<div class="container">
+    <div style="border:3px solid black;border-radius:20px">
+        <h1 class="text-center mb-5 mt-3">Registration</h1>
+        <form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row justify-content-center">
+                <div class="col-md-4 form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" id="txtname" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Age" class="control-label">Age</label>
+                    <input asp-for="Age" class="form-control" id="txtage"/>
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4 form-group mt-4">
+                    <label class="form-check-label">Gender :</label>
+                    <input type="radio" class="ml-3" asp-for="Gender" value="Male" id="txtgender1"/> Male
+                    <input type="radio" class="ml-2" asp-for="Gender" value="Female" id="txtgender2"/> Female
+                    <input type="radio" class="ml-2" asp-for="Gender" value="Trangender" id="txtgender3"/> Trangender
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Qualification</label>
+                    <select asp-for="Qualification" id="txtqualification" class="form-control" asp-items="@Html.GetEnumSelectList<Qualification>()">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="Qualification" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" id="txtemail"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Password</label>
+                    <input asp-for="Password" class="form-control" id="txtpwd"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-4 form-group">
+                    <label class="control-label">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" class="form-control" id="txtcnfpwd"/>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group mt-4">
+                    <label class="form-check-label ml-4">
+                        <input class="form-check-input" type="checkbox" id="chkstatus" asp-for="IsActive" />Active
+                    </label>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8 form-group">
+                    <button onclick="AddData();" type="submit" class="btn btn-primary form-control mb-4 text-white">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/Employee.js"></script>
+
+}
+
